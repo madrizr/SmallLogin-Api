@@ -1,0 +1,66 @@
+.boton{
+	display: flex;
+	align-items: center;
+}
+.clic{
+	text-decoration: none;
+	color: #2B8689;
+	font-weight: 600;
+	padding: 20px;
+}
+.boton .clic:hover{
+	background: #22697E;
+	color: white;
+}
+
+.contenedor{
+	border-radius: 10px;
+	border-color: blue;
+	background-color: #DFDFDF;
+	box-shadow: 3px 3px 3px 1px;
+	padding: 10px;
+}
+.color{
+	color: #2B8689;
+	font-weight: 600;
+	font-size: 25px;
+}
+.btn-per{
+	border-radius: 20px;
+	color: #2B8689;
+	font-weight: 500;
+	border-color: #23668C;
+	border-width: 2px;
+	margin-bottom: 20px;
+}
+
+.form-control{
+	border-color: #23668C;
+	border-width: 1.5px;
+}
+.form-control-lg{
+	border-color: #23668C;
+	border-width: 1.5px;
+}
+
+.centrar{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-control:focus{
+	border-color: #B70A0A;
+	border-width: 1.5px;
+	box-shadow: none;
+}
+.btn:focus{
+	box-shadow: none;
+}
+.btn-per:hover{
+	color: white;
+	background-color: #23668C;
+}
+.boton:hover{
+	cursor: pointer;
+}
