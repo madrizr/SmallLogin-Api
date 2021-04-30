@@ -2,6 +2,7 @@
 if(!(localStorage.getItem("datos_de_usuario"))){
 	window.location.href="../main.html";
 }
+
 var usuario_datos = getlocalStorage("datos_de_usuario");
 var saludo = document.getElementById('welcome');
 var mostrar_resultado = document.getElementById('resultado');

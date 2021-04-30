@@ -9,13 +9,12 @@ var alerta = document.getElementById('alarm');
 //1. Ejecutar funcion al recibir un submit
 formulario.addEventListener('submit', function(e){
 	e.preventDefault(); // Evitar que pase por get
-	//console.log('me diste un clic');
 
 	var datos_usuario = new FormData(formulario); // 2. Capturar datos
 	var usuario = datos_usuario.get('usuario');
 	var password = datos_usuario.get('password');
 
-	//3. Hacer llamada ajax por fetch
+	//3. Hacer llamada por fetch
 	fetch('backend/servidor.php', {
 		method: 'POST',
 		body: datos_usuario
