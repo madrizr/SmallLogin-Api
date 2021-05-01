@@ -22,7 +22,7 @@ obtener_consulta.addEventListener('submit', function(e){
 	.then(res => res.json())
 	.then(respuesta => {
 	pais = respuesta[pais];
-	console.log(pais)
+	//console.log(pais)
 	mostrarDatos(pais);
 	})
 
@@ -40,7 +40,7 @@ function mostrarDatos(moneda){
 	.then(respuesta => respuesta.json())
 	.then(datos => {
 
-		console.log(datos.rates[moneda]);
+		//console.log(datos.rates[moneda]);
 
 		if (datos.rates[moneda]) {
 			let cotizacion = datos.rates[moneda];
@@ -54,7 +54,7 @@ function mostrarDatos(moneda){
 			`
 		}
 
-		if(datos.rates[moneda] === undefined){
+		if(datos.rates[moneda] === undefined && moneda != 'USD'){
 		alerta.innerHTML = 
 			`<div class="alert alert-danger text-center">Codigo de divisa Invalido</div>`
 		mostrar_resultado.innerHTML = ``;
@@ -74,7 +74,6 @@ function getlocalStorage(storage_name){
 }
 //cerrar sesion
 function cerrarSesion(){
-	console.log('hola');
 	localStorage.removeItem("datos_de_usuario");
 	window.location.href="../main.html"
 }
