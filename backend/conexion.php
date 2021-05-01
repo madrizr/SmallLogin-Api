@@ -1,6 +1,6 @@
 <?php 
 	$user_db = "root";
-	$pass_db = "aG9sYSBrc2Rl";
+	$pass_db = "romano00";
 
 	try {
     $pdo = new PDO('mysql:host=localhost;dbname=login', $user_db, $pass_db);

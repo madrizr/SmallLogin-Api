@@ -15,24 +15,33 @@ obtener_consulta.addEventListener('submit', function(e){
 
 	if (datos_consulta.get('moneda') != '') {
 	let pais = datos_consulta.get('moneda');
-	pais = pais.toUpperCase();
+	pais = pais.normalize('NFD').replace(/[\u0300-\u036f]/g,""); //Quitar tildes
+	pais = pais.toLowerCase(); //pasar a minusculas
+
+	fetch('../currencies.json')
+	.then(res => res.json())
+	.then(respuesta => {
+	pais = respuesta[pais];
 	console.log(pais)
 	mostrarDatos(pais);
+	})
 
 	}else{
+		quitarAlerta();
 		alerta.innerHTML = 
-		`<div class="alert alert-danger text-center">Introduzca el codigo de divisa</div>`
+		`<div class="alert alert-danger text-center">Introduce el pais que quieres consultar</div>`
 	}
 })
 
 saludo.innerHTML = `Hola ${usuario_datos.nombre}`
 function mostrarDatos(moneda){
-
+		loading();
 	fetch('https://www.frankfurter.app/latest?from=USD')
 	.then(respuesta => respuesta.json())
 	.then(datos => {
 
 		console.log(datos.rates[moneda]);
+
 		if (datos.rates[moneda]) {
 			let cotizacion = datos.rates[moneda];
 			mostrar_resultado.innerHTML = `
@@ -46,10 +55,11 @@ function mostrarDatos(moneda){
 		}
 
 		if(datos.rates[moneda] === undefined){
-			alerta.innerHTML = 
+		alerta.innerHTML = 
 			`<div class="alert alert-danger text-center">Codigo de divisa Invalido</div>`
+		mostrar_resultado.innerHTML = ``;
+		quitarAlerta();
 		}
-		
 	})
 }
 
@@ -68,4 +78,14 @@ function cerrarSesion(){
 	localStorage.removeItem("datos_de_usuario");
 	window.location.href="../main.html"
 }
-	
+
+function loading(){
+	mostrar_resultado.innerHTML = `<div class="spinner text-center">
+						<div class="dot1"></div>
+  						<div class="dot2"></div></div>`;
+}
+
+function quitarAlerta(){ 
+setTimeout(() =>{
+			alerta.innerHTML = ``;
+		}, 2000);}
