@@ -1,17 +1,15 @@
 //Verificar si hay usa sesion activa.
-if(!(localStorage.getItem("datos_de_usuario"))){
-	window.location.href="../main.html";
-}
+if(!(localStorage.getItem("datos_de_usuario"))) window.location.href="../main.html";
 
-var usuario_datos = getlocalStorage("datos_de_usuario");
-var saludo = document.getElementById('welcome');
-var mostrar_resultado = document.getElementById('resultado');
-var obtener_consulta = document.getElementById('consulta');
-var alerta = document.getElementById('alert');
+const usuario_datos = getlocalStorage("datos_de_usuario");
+const saludo = document.getElementById('welcome');
+const mostrar_resultado = document.getElementById('resultado');
+const obtener_consulta = document.getElementById('consulta');
+const alerta = document.getElementById('alert');
 
-obtener_consulta.addEventListener('submit', function(e){
+obtener_consulta.addEventListener('submit', e => {
 	e.preventDefault();
-	var datos_consulta = new FormData(obtener_consulta);
+	const datos_consulta = new FormData(obtener_consulta);
 
 	if (datos_consulta.get('moneda') != '') {
 	let pais = datos_consulta.get('moneda');
@@ -34,7 +32,7 @@ obtener_consulta.addEventListener('submit', function(e){
 })
 
 saludo.innerHTML = `Hola ${usuario_datos.nombre}`
-function mostrarDatos(moneda){
+const mostrarDatos = moneda => {
 		loading();
 	fetch('https://www.frankfurter.app/latest?from=USD')
 	.then(respuesta => respuesta.json())
@@ -56,7 +54,7 @@ function mostrarDatos(moneda){
 
 		if(datos.rates[moneda] === undefined && moneda != 'USD'){
 		alerta.innerHTML = 
-			`<div class="alert alert-danger text-center">Codigo de divisa Invalido</div>`
+			`<div class="alert alert-danger text-center">Nombre de pais invalido</div>`
 		mostrar_resultado.innerHTML = ``;
 		quitarAlerta();
 		}
@@ -64,27 +62,26 @@ function mostrarDatos(moneda){
 }
 
 
-
 //obtener los datos del local storage
 function getlocalStorage(storage_name){
 	
-	var mostrar = localStorage.getItem(storage_name);
-	var listos = JSON.parse(mostrar);
+	let mostrar = localStorage.getItem(storage_name);
+	let listos = JSON.parse(mostrar);
 	return listos
 }
 //cerrar sesion
-function cerrarSesion(){
+const cerrarSesion = () => {
 	localStorage.removeItem("datos_de_usuario");
 	window.location.href="../main.html"
 }
 
-function loading(){
+const loading = () => {
 	mostrar_resultado.innerHTML = `<div class="spinner text-center">
 						<div class="dot1"></div>
   						<div class="dot2"></div></div>`;
 }
 
-function quitarAlerta(){ 
+const quitarAlerta = () => { 
 setTimeout(() =>{
 			alerta.innerHTML = ``;
 		}, 2000);}

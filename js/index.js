@@ -1,18 +1,17 @@
 //Verificar si hay una sesion activa
-if(localStorage.getItem("datos_de_usuario")){
-	location.href = "dashboard/dashboard.html"
-}
+if(localStorage.getItem("datos_de_usuario")) location.href = "dashboard/dashboard.html";
+
 //Capturar los id
-var formulario = document.getElementById('formulario');
-var alerta = document.getElementById('alarm');
+const formulario = document.getElementById('formulario');
+const alerta = document.getElementById('alarm');
 
 //1. Ejecutar funcion al recibir un submit
-formulario.addEventListener('submit', function(e){
+formulario.addEventListener('submit', e => {
 	e.preventDefault(); // Evitar que pase por get
 
-	var datos_usuario = new FormData(formulario); // 2. Capturar datos
-	var usuario = datos_usuario.get('usuario');
-	var password = datos_usuario.get('password');
+	const datos_usuario = new FormData(formulario); // 2. Capturar datos
+	const usuario = datos_usuario.get('usuario');
+	const password = datos_usuario.get('password');
 
 	//3. Hacer llamada por fetch
 	fetch('backend/servidor.php', {
@@ -22,20 +21,15 @@ formulario.addEventListener('submit', function(e){
 	.then(res => res.json())
 	.then(respuesta => {
 		//Ejecutar las validaciones
-		if (respuesta === '0') {
-			alerta.innerHTML = `<div class="alert alert-danger text-center">Usuario no encontrado</div>`
-		}
-		if (respuesta === '1') {
-			alerta.innerHTML = `<div class="alert alert-danger text-center">Password incorrecta</div>`
-		}
+		if (respuesta === '0') alerta.innerHTML = `<div class="alert alert-danger text-center">Usuario no encontrado</div>`;
+		
+		if (respuesta === '1') alerta.innerHTML = `<div class="alert alert-danger text-center">Password incorrecta</div>`;
 		
 		if (respuesta.respuesta === 'true') {
 			//console.log(respuesta)
 		 setLocalStorage(respuesta.name, respuesta.usuario);
-			
 			location.href="dashboard/dashboard.html";
 		}
-
 	})
 });
 
